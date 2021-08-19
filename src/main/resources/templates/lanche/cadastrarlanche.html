@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Lanche</title>
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- Adicionando JQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd) {
+	background-color: rgba(158, 154, 154, 0.5);
+}
+
+form input[type=submit] {
+	color: white;
+}
+</style>
+
+</head>
+<body>
+
+	<h3>AQUI VOCÊ PODE CADASTRAR NOVOS LANCHE</h3>
+	<br />
+
+	<h5>Cadastrar</h5>
+	<a href="/cadastraringrediente">Cadastrar Novo Ingrediente</a>
+	<br />
+	<a href="/">Voltar</a>
+
+	<br />
+	<br />
+	<br />
+
+	<div class="row">
+		<span th:text="${msg}" />
+	</div>
+
+
+	<form action="salvarlanche" id="formulariolanche" method="post"
+		th:object="${lancheobjeto}"
+		onsubmit="return validarCampos()? true : false" class="col s12">
+
+
+		<div class="input-fiel col s6">
+			<h5>Clique em adicionar nos ingredientes para montar novo lanche</h5>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Preço</th>
+						<th>Adicionar Ingrediente</th>
+					</tr>
+				</thead>
+				<tr th:each="l : ${listaingredientes}">
+					<td th:text="${l.nome}"></td>
+					<td th:text="${l.preco}"></td>
+					<td><a
+						th:href="@{/adicionaringrediente/{idingrediente}(idingrediente=${l.id})}">Adicionar</a></td>
+				</tr>
+			</table>
+
+		</div>
+
+		<br />
+
+		<div class="input-fiel col s6">
+			<input type="text" id="id" name="id" th:field="*{id}"
+				readonly="readonly" class="validate" />
+		</div>
+
+
+		<div class="input-fiel col s6">
+
+			<h6>Ingredientes escolhidos apareceram aqui</h6>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Remover Ingrediente adicionado</th>
+					</tr>
+				</thead>
+				<tr th:each="l : ${ingredientesadicionados}">
+					<td th:text="${l.nome}"></td>
+					<td><a
+						th:href="@{/removeringredientedolanche/{idingrediente}(idingrediente=${l.id})}">Remover</a></td>
+				</tr>
+			</table>
+
+		</div>
+
+		<br />
+
+		<div class="input-fiel col s6">
+			<input type="text" placeholder="Nome do lanche" id="nome" name="nome"
+				th:field="*{nome}" class="validate" />
+		</div>
+
+		<br /> <br /> <br /> <br /> <input type="submit"
+			value="Salvar lanche" id="buttonsalvarlanche"
+			class="waves-effect waves-light btn" />
+	</form>
+
+
+	<br />
+	<br />
+	<br />
+
+	<table>
+		<thead>
+			<tr>
+				<th>Código</th>
+				<th>Nome</th>
+				<th>Preço</th>
+				<th>Remover</th>
+			</tr>
+		</thead>
+		<tr th:each="l : ${lista}">
+			<td th:text="${l.id}"></td>
+			<td th:text="${l.nome}"></td>
+			<td th:text="${l.preco}"></td>
+			<td><a th:href="@{/removerlanche/{idlanche}(idlanche=${l.id})}">Remover</a></td>
+		</tr>
+	</table>
+
+
+	<script type="text/javascript">
+		function validarCampos() {
+			nome = document.getElementById('nome').value;
+
+			if (nome == '') {
+				alert("Nome do lanche deve ser informado");
+				return false;
+			}
+
+			return true;
+
+		}
+	</script>
+
+</body>
+</html>
