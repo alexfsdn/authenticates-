@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Lanche</title>
 
 <!-- Compiled and minified CSS -->
@@ -35,12 +35,9 @@ form input[type=submit] {
 </head>
 <body>
 
-	<h3>AQUI VOCÊ PODE CADASTRAR NOVOS LANCHE</h3>
+	<h3>AQUI VOCÃŠ PODE CADASTRAR NOVOS LANCHE, SQN</h3>
 	<br />
 
-	<h5>Cadastrar</h5>
-	<a href="/cadastraringrediente">Cadastrar Novo Ingrediente</a>
-	<br />
 	<a href="/">Voltar</a>
 
 	<br />
@@ -52,7 +49,7 @@ form input[type=submit] {
 	</div>
 
 
-	<form action="salvarlanche" id="formulariolanche" method="post"
+	<form action="salvarlanche" method="post"
 		th:object="${lancheobjeto}"
 		onsubmit="return validarCampos()? true : false" class="col s12">
 
@@ -63,7 +60,7 @@ form input[type=submit] {
 				<thead>
 					<tr>
 						<th>Nome</th>
-						<th>Preço</th>
+						<th>PreÃ§o</th>
 						<th>Adicionar Ingrediente</th>
 					</tr>
 				</thead>
@@ -71,7 +68,7 @@ form input[type=submit] {
 					<td th:text="${l.nome}"></td>
 					<td th:text="${l.preco}"></td>
 					<td><a
-						th:href="@{/adicionaringrediente/{idingrediente}(idingrediente=${l.id})}">Adicionar</a></td>
+						>Adicionar</a></td>
 				</tr>
 			</table>
 
@@ -98,7 +95,7 @@ form input[type=submit] {
 				<tr th:each="l : ${ingredientesadicionados}">
 					<td th:text="${l.nome}"></td>
 					<td><a
-						th:href="@{/removeringredientedolanche/{idingrediente}(idingrediente=${l.id})}">Remover</a></td>
+						>Remover</a></td>
 				</tr>
 			</table>
 
@@ -112,7 +109,7 @@ form input[type=submit] {
 		</div>
 
 		<br /> <br /> <br /> <br /> <input type="submit"
-			value="Salvar lanche" id="buttonsalvarlanche"
+			value="Salvar lanche"
 			class="waves-effect waves-light btn" />
 	</form>
 
@@ -124,9 +121,9 @@ form input[type=submit] {
 	<table>
 		<thead>
 			<tr>
-				<th>Código</th>
+				<th>CÃ³digo</th>
 				<th>Nome</th>
-				<th>Preço</th>
+				<th>PreÃ§o</th>
 				<th>Remover</th>
 			</tr>
 		</thead>
@@ -134,7 +131,7 @@ form input[type=submit] {
 			<td th:text="${l.id}"></td>
 			<td th:text="${l.nome}"></td>
 			<td th:text="${l.preco}"></td>
-			<td><a th:href="@{/removerlanche/{idlanche}(idlanche=${l.id})}">Remover</a></td>
+			<td><a>Remover</a></td>
 		</tr>
 	</table>
 
